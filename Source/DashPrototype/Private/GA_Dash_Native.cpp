@@ -120,9 +120,7 @@ bool UGA_Dash_Native::CanDash(const UAbilitySystemComponent* asc) const
 
 FVector UGA_Dash_Native::GetDashDestination() const
 {
-	AActor* OwningActor = GetOwningActorFromActorInfo();
-	UAbilitySystemComponent* ASC = GetAbilitySystemComponentFromActorInfo();
-
+	const AActor* OwningActor = GetOwningActorFromActorInfo();
 	if (!OwningActor)
 	{
 		// Error, this shouldn't be hit
@@ -137,11 +135,11 @@ FVector UGA_Dash_Native::GetDashDestination() const
 
 bool UGA_Dash_Native::IsValidDashLocation(const FVector& Location, const TArray<FHitResult>& HitResults) const
 {
-	FVector FloorCheck = Location + FVector(0,0,-500);
+	const FVector FloorCheck = Location + FVector(0,0,-500);
 	FCollisionQueryParams CollisionParams; // define the collision
 	FHitResult Hit;
-	
-	bool hasFloor = GetWorld()->LineTraceSingleByChannel(Hit, Location, FloorCheck, ECC_Visibility, CollisionParams);
+
+	const bool hasFloor = GetWorld()->LineTraceSingleByChannel(Hit, Location, FloorCheck, ECC_Visibility, CollisionParams);
 	if (!hasFloor)
 	{
 		return false;
@@ -154,8 +152,7 @@ bool UGA_Dash_Native::IsValidDashLocation(const FVector& Location, const TArray<
 
 	for (FHitResult HitResult : HitResults)
 	{
-		UPrimitiveComponent* HitComponent = HitResult.Component.Get();
-		if (HitComponent)
+		if (UPrimitiveComponent* HitComponent = HitResult.Component.Get())
 		{
 			if (HitComponent->GetCollisionResponseToChannel(ECC_Pawn) == ECollisionResponse::ECR_Block)
 			{
@@ -174,9 +171,9 @@ FVector UGA_Dash_Native::FindFurthestDestinationAlongPath(const FVector& StartLo
 	FVector UnitVector = Direction.GetSafeNormal();
 
 	//Get Radius and height
-	float CapsuleDiameter = 84.0f;
+	const float CapsuleDiameter = 84.0f;
 
-	int CapsuleCount = Direction.Size() / CapsuleDiameter;
+	const int CapsuleCount = Direction.Size() / CapsuleDiameter;
 
 	for (int i = 0; i < CapsuleCount; i++)
 	{
