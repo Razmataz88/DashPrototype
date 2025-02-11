@@ -2,6 +2,9 @@
 
 
 #include "GASTopDownCharacter.h"
+#include "AbilitySystemComponent.h"
+#include "GA_Dash_Native.h"
+#include "DashAttributeSet.h"
 
 // Sets default values
 AGASTopDownCharacter::AGASTopDownCharacter()

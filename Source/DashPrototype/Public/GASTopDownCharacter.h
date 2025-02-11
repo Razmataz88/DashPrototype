@@ -3,10 +3,12 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "DashAttributeSet.h"
-#include "GA_Dash_Native.h"
 #include "GameFramework/Character.h"
 #include "GASTopDownCharacter.generated.h"
+
+class UAbilitySystemComponent;
+class UDashAttributeSet;
+class UGA_Dash_Native;
 
 UCLASS()
 class DASHPROTOTYPE_API AGASTopDownCharacter : public ACharacter
@@ -38,5 +40,5 @@ public:
 	UDashAttributeSet* DashAttributeSet;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Abilities")
-	TSubclassOf<class UGameplayAbility> DashAbilityClass;
+	TSubclassOf<class UGA_Dash_Native> DashAbilityClass;
 };

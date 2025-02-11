@@ -7,7 +7,6 @@
 #include "Abilities/Tasks/AbilityTask_PlayMontageAndWait.h"
 #include "Abilities/Tasks/AbilityTask_MoveToLocation.h"
 #include "DashAttributeSet.h"
-#include "VectorTypes.h"
 #include "Kismet/KismetSystemLibrary.h"
 
 bool UGA_Dash_Native::CanActivateAbility(const FGameplayAbilitySpecHandle Handle,
@@ -61,9 +60,8 @@ void UGA_Dash_Native::ActivateAbility(const FGameplayAbilitySpecHandle Handle,
 		EndAbility(Handle, ActorInfo, ActivationInfo, false, false);
 		return;
 	}
-	
-	UAbilityTask_PlayMontageAndWait* MontageTask = UAbilityTask_PlayMontageAndWait::CreatePlayMontageAndWaitProxy(this, "Dash", DashMontage);
-	if (MontageTask)
+
+	if (UAbilityTask_PlayMontageAndWait* MontageTask = UAbilityTask_PlayMontageAndWait::CreatePlayMontageAndWaitProxy(this, "Dash", DashMontage))
 	{
 		MontageTask->Activate();
 	}
